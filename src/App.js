@@ -16,6 +16,7 @@ function App() {
     const name = event.target.name.value;
     const email = event.target.email.value;
     const user = { name, email }
+    // submit korar por name and email ta user object e ashbe, tarpor seta amra fetch korbo POST method e.
 
     fetch('http://localhost:5000/users', {
       method: 'POST',
@@ -23,12 +24,12 @@ function App() {
         'Content-type' : 'application/json',
       },
       body: JSON.stringify(user)
-    })
+    }) // post kore seta body te set hobe. req.body theke amra seta pabo
     .then(res => res.json())
     .then(data => {
       const newUsers = [...users, data]
-      setUsers(newUsers)
-      console.log(data)
+      setUsers(newUsers) //ekhon jei data submit korlam seta ager datar sathe array te jabe
+      console.log('eta koi dekhacche', data) //client er console log e dekhabe.
 
     })
     .catch(err => console.error(err))
@@ -45,7 +46,7 @@ function App() {
 
       <h3>Total User:{users.length}</h3>
       {
-        users.map(user => <p>Name: {user.name} {<br></br>} Email: {user.email} </p>)
+        users.map(user => <p key={user._id} >Name: {user.name} {<br></br>} Email: {user.email} </p>)
       }
     </div>
   );
